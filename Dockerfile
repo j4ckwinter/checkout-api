@@ -13,7 +13,7 @@ RUN npm install
 # Copy the source code
 COPY src ./src
 
-# Copy the source code
+# Copy the tsconfig.json
 COPY tsconfig.json ./
 
 # Build the TypeScript app

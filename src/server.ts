@@ -24,5 +24,3 @@ server.use("/documentation", swagger.serve, swagger.setup(swaggerDocument));
 server.use("/api", router);
 
 server.listen(3001, () => console.log("Listening on port 3001"));
-
-export default server;
