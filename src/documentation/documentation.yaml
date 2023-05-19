@@ -4,9 +4,9 @@ info:
   description: This is the checkout API documentation file
   version: 1.0.0
 servers:
-  - url: http://localhost:3001
+  - url: http://localhost:3001/api
 paths:
-  /checkout:
+  /items/checkout:
     post:
       summary: Perform checkout
       requestBody:
