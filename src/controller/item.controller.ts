@@ -3,6 +3,7 @@ import { ItemService } from "../service";
 import { CheckoutSuccess } from "../model/response/checkout-success.model";
 import { CheckoutFailureError } from "../error/checkout-failure-error";
 import { CheckoutFailure } from "../model/response/checkout-failure.model";
+import { CheckoutRequest } from "../model/request/checkout-request.model";
 
 export class ItemController {
   private itemService: ItemService;
@@ -14,7 +15,7 @@ export class ItemController {
     return this.itemService.getItems();
   }
 
-  checkout(purchasedItems: Item[]): CheckoutSuccess {
+  checkout({ purchasedItems }: CheckoutRequest): CheckoutSuccess {
     const response: CheckoutSuccess | CheckoutFailure =
       this.itemService.checkout(purchasedItems);
     if (!response.success) {
