@@ -32,9 +32,11 @@ describe("API Tests", () => {
     // When
     const response: request.Response = await request(server)
       .post("/api/items/checkout")
-      .send([
-        { sku: "A304SD", name: "Alexa Speaker", price: 109.5, quantity: 1 },
-      ]);
+      .send({
+        purchasedItems: [
+          { sku: "A304SD", name: "Alexa Speaker", price: 109.5, quantity: 1 },
+        ],
+      });
 
     // Then
     expect(response.status).toBe(200);
@@ -60,9 +62,16 @@ describe("API Tests", () => {
     // When
     const response: request.Response = await request(server)
       .post("/api/items/checkout")
-      .send([
-        { sku: "Invalid sku", name: "Google Home", price: 49.99, quantity: 1 },
-      ]);
+      .send({
+        purchasedItems: [
+          {
+            sku: "Invalid sku",
+            name: "Google Home",
+            price: 49.99,
+            quantity: 1,
+          },
+        ],
+      });
 
     // Then
     expect(response.status).toBe(400);
@@ -87,9 +96,11 @@ describe("API Tests", () => {
     // When
     const response: request.Response = await request(server)
       .post("/api/items/checkout")
-      .send([
-        { sku: "120P90", name: "Google Home", price: 49.99, quantity: 20 },
-      ]);
+      .send({
+        purchasedItems: [
+          { sku: "120P90", name: "Google Home", price: 49.99, quantity: 20 },
+        ],
+      });
 
     // Then
     expect(response.status).toBe(400);
@@ -120,9 +131,11 @@ describe("API Tests", () => {
       // When
       const response: request.Response = await request(server)
         .post("/api/items/checkout")
-        .send([
-          { sku: "43N23P", name: "MacBook Pro", price: 5399.99, quantity: 2 },
-        ]);
+        .send({
+          purchasedItems: [
+            { sku: "43N23P", name: "MacBook Pro", price: 5399.99, quantity: 2 },
+          ],
+        });
 
       // Then
       expect(response.status).toBe(200);
@@ -147,9 +160,11 @@ describe("API Tests", () => {
       // When
       const response: request.Response = await request(server)
         .post("/api/items/checkout")
-        .send([
-          { sku: "120P90", name: "Google Home", price: 49.99, quantity: 6 },
-        ]);
+        .send({
+          purchasedItems: [
+            { sku: "120P90", name: "Google Home", price: 49.99, quantity: 6 },
+          ],
+        });
 
       // Then
       expect(response.status).toBe(200);
@@ -174,9 +189,11 @@ describe("API Tests", () => {
       // When
       const response: request.Response = await request(server)
         .post("/api/items/checkout")
-        .send([
-          { sku: "A304SD", name: "Alexa Speaker", price: 109.5, quantity: 3 },
-        ]);
+        .send({
+          purchasedItems: [
+            { sku: "A304SD", name: "Alexa Speaker", price: 109.5, quantity: 3 },
+          ],
+        });
 
       // Then
       expect(response.status).toBe(200);
