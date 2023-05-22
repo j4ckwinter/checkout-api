@@ -5,6 +5,7 @@ import { CheckoutFailure } from "../model/response/checkout-failure.model";
 import { FailureDetails } from "../model/response/failure-details.model";
 import { CheckoutSuccess } from "../model/response/checkout-success.model";
 import { ResponseItem } from "../model/response/response-item.model";
+import { FailureMessage } from "../model/response/failure-message.enum";
 
 describe("API Tests", () => {
   let server: Express;
@@ -48,9 +49,9 @@ describe("API Tests", () => {
     const expectedDetails: FailureDetails[] = [
       {
         sku: "Invalid sku",
-        message: "No item exists for the sku you have provided.",
+        message: FailureMessage.NO_ITEM,
         name: "Google Home",
-        exisQuantity: 0,
+        existQuantity: 0,
         reqQuantity: 1,
       },
     ];
@@ -82,9 +83,9 @@ describe("API Tests", () => {
     const expectedDetails: FailureDetails[] = [
       {
         sku: "120P90",
-        message: "Not enough stock for the amount you have requested.",
+        message: FailureMessage.NO_STOCK,
         name: "Google Home",
-        exisQuantity: 10,
+        existQuantity: 10,
         reqQuantity: 20,
       },
     ];

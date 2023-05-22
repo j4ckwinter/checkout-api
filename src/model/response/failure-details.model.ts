@@ -1,7 +1,9 @@
+import { FailureMessage } from "./failure-message.enum";
+
 export interface FailureDetails {
-  message: string;
+  message: FailureMessage;
   sku: string;
   name: string;
   reqQuantity: number;
-  exisQuantity: number;
+  existQuantity: number;
 }

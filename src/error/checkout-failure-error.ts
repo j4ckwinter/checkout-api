@@ -7,6 +7,5 @@ export class CheckoutFailureError extends Error {
     super("Checkout failed");
     this.name = "Checkout Failure Error";
     this.response = response;
-    Object.setPrototypeOf(this, CheckoutFailureError.prototype);
   }
 }

@@ -15,38 +15,32 @@ export class StockService {
   }
 
   checkStock(purchasedItems: Item[]): FailureDetails[] {
-    return purchasedItems.flatMap((item: Item) => {
+    return purchasedItems.reduce((result: FailureDetails[], item: Item) => {
       const stockItem: Item | undefined = this.items.find(
         (stockItem: Item) => stockItem.sku === item.sku
       );
-      const exisQuantity: number = stockItem?.quantity ?? 0;
+      const existQuantity: number = stockItem?.quantity ?? 0;
 
       if (!stockItem) {
-        return [
-          {
-            message: FailureMessage.NO_ITEM,
-            sku: item.sku,
-            name: item.name,
-            reqQuantity: item.quantity,
-            exisQuantity,
-          },
-        ];
+        result.push({
+          message: FailureMessage.NO_ITEM,
+          sku: item.sku,
+          name: item.name,
+          reqQuantity: item.quantity,
+          existQuantity,
+        });
+      } else if (item.quantity > existQuantity) {
+        result.push({
+          message: FailureMessage.NO_STOCK,
+          sku: item.sku,
+          name: item.name,
+          reqQuantity: item.quantity,
+          existQuantity,
+        });
       }
 
-      if (item.quantity > exisQuantity) {
-        return [
-          {
-            message: FailureMessage.NO_STOCK,
-            sku: item.sku,
-            name: item.name,
-            reqQuantity: item.quantity,
-            exisQuantity,
-          },
-        ];
-      }
-
-      return [];
-    });
+      return result;
+    }, []);
   }
 
   getItemQuantity(newItem: Item | undefined): number | undefined {
